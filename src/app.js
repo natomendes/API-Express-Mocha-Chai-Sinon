@@ -22,8 +22,8 @@ app.get('/chocolates/:id', async (req, res) => {
   res
     .status(200)
     .json({
-      chocolate
-    })
+      chocolate,
+    });
 });
 
 app.get('/chocolates/brand/:brandId', async (req, res) => {
@@ -33,8 +33,8 @@ app.get('/chocolates/brand/:brandId', async (req, res) => {
   res
     .status(200)
     .json({
-      chocolates
-    })
-})
+      chocolates,
+    });
+});
 
 module.exports = app;

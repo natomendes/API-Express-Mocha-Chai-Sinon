@@ -6,7 +6,6 @@ const readCacaoTrybeFile = async () => {
   try {
     const contentFile = await fs.readFile(join(__dirname, path), 'utf-8');
     return JSON.parse(contentFile);
-
   } catch (err) {
     console.log(err);
   }
@@ -21,16 +20,16 @@ const getChocolateById = async (id) => {
   const cacaoTrybe = await readCacaoTrybeFile();
   return cacaoTrybe.chocolates
     .filter(({ id: chocolateId }) => id === chocolateId);
-}
+};
 
 const getChocolatesByBrandId = async (id) => {
   const cacaoTrybe = await readCacaoTrybeFile();
   return cacaoTrybe.chocolates
     .filter(({ brandId }) => id === brandId);
-}
+};
 
 module.exports = {
   getAllChocolates,
   getChocolateById,
-  getChocolatesByBrandId
-}
+  getChocolatesByBrandId,
+};
