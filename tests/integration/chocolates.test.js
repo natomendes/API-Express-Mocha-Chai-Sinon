@@ -82,4 +82,19 @@ describe('Testing cacaoTrybe API', function () {
       expect(response.body.chocolates).to.deep.equal(output);
     });
   });
+
+  describe('GET method on /chocolates/total', function () {
+    it('Should return the total of chocolates', async function () {
+      const output = {
+        totalChocolates: 4,
+      };
+
+      response = await chai
+        .request(app)
+        .get('/chocolates/total');
+
+      expect(response.status).to.equal(200);
+      expect(response.body.totalChocolates).to.deep.equal(output);
+    });
+  });
 });
