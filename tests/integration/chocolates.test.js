@@ -99,7 +99,7 @@ describe('Testing cacaoTrybe API', function () {
   });
 
   describe('GET method on /chocolates/search', function () {
-    it('Should return the chocolates containing the string passed', async function () {
+    it('Should return the chocolates containing the string "Mo" in the name', async function () {
       const output = [
         {
           id: 3,
@@ -121,7 +121,7 @@ describe('Testing cacaoTrybe API', function () {
       expect(response.body.searchedChocolates).to.deep.equal(output);
     });
 
-    it('Should return [] and code status 404 when no chocolate is found', async function () {
+    it('Should return [] and code status 404 when the string passed is "Zzzz', async function () {
       const output = [];
 
       response = await chai
@@ -130,6 +130,28 @@ describe('Testing cacaoTrybe API', function () {
 
       expect(response.status).to.equal(404);
       expect(response.body.searchedChocolates).to.deep.equal(output);
+    });
+  });
+
+  describe('PUT method on /chocolates/:id', function () {
+    it('Should update the chocolate of the id passed with the new information', async function () {
+      const output = {
+        chocolate: { 
+          id: 1,
+          name: 'Mint Pretty Good',
+          brandId: 2,
+        },
+      };
+      response = await chai
+        .request(app)
+        .put('/chocolates/1')
+        .send({
+          name: 'Mint Pretty Good',
+          brandId: 2,
+        });
+
+      expect(response.status).to.equal(200);
+      expect(response.body.updatedChocolate).to.deep.equal(output);
     });
   });
 });
