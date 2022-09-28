@@ -38,7 +38,7 @@ describe('Testing cacaoTrybe API', function () {
   });
 
   describe('GET method on /chocolates/:id', function () {
-    it('Should return one chocolate matching de id passed through params', async function () {
+    it('Should return one chocolate matching de chocolate id passed through params', async function () {
       const output = [{
         id: 4,
         name: 'Mounds',
@@ -51,6 +51,31 @@ describe('Testing cacaoTrybe API', function () {
 
       expect(response.status).to.equal(200);
       expect(response.body.chocolate).to.deep.equal(output);
-    })
-  })
+    });
+  });
+
+  describe('GET method on /chocolates/brand/:brandId', function () {
+    it('Should return one chocolate matching de brand id passed through params', async function () {
+      const output = [
+        {
+            "id": 1,
+            "name": "Mint Intense",
+            "brandId": 1
+        },
+        {
+            "id": 2,
+            "name": "White Coconut",
+            "brandId": 1
+        }
+      ]
+
+      response = await chai
+        .request(app)
+        .get('/chocolates/brand/1');
+
+      expect(response.status).to.equal(200);
+      expect(response.body.chocolate).to.deep.equal(output);
+    });
+  });
+
 })
