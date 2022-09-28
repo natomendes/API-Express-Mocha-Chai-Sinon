@@ -35,9 +35,16 @@ const sumChocolates = async () => {
   };
 };
 
+const searchByQuery = async (query) => {
+  const cacaoTrybe = await readCacaoTrybeFile();
+  return cacaoTrybe.chocolates
+    .filter(({ name }) => name.includes(query));
+};
+
 module.exports = {
   getAllChocolates,
   getChocolateById,
   getChocolatesByBrandId,
   sumChocolates,
+  searchByQuery,
 };

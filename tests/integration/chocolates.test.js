@@ -99,7 +99,7 @@ describe('Testing cacaoTrybe API', function () {
   });
 
   describe('GET method on /chocolates/search', function () {
-    it('Should the chocolates containing the string passed', async function () {
+    it('Should return the chocolates containing the string passed', async function () {
       const output = [
         {
           id: 3,
@@ -118,7 +118,18 @@ describe('Testing cacaoTrybe API', function () {
         .get('/chocolates/search?name=Mo');
 
       expect(response.status).to.equal(200);
-      expect(response.body.totalChocolates).to.deep.equal(output);
+      expect(response.body.searchedChocolates).to.deep.equal(output);
+    });
+
+    it('Should return [] and code status 404 when no chocolate is found', async function () {
+      const output = [];
+
+      response = await chai
+        .request(app)
+        .get('/chocolates/search?name=ZZzz');
+
+      expect(response.status).to.equal(404);
+      expect(response.body.searchedChocolates).to.deep.equal(output);
     });
   });
 });
