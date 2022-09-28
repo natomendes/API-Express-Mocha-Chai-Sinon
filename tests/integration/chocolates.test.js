@@ -1,7 +1,6 @@
 const chai = require('chai');
 
 const { expect } = chai;
-let { response } = chai;
 const chaiHttp = require('chai-http');
 const sinon = require('sinon');
 const fs = require('fs');
@@ -30,7 +29,7 @@ describe('Testing cacaoTrybe API', function () {
         { id: 4, name: 'Mounds', brandId: 3 },
       ];
   
-      response = await chai
+      const response = await chai
         .request(app)
         .get('/chocolates');
       
@@ -49,7 +48,7 @@ describe('Testing cacaoTrybe API', function () {
         brandId: 3,
       }];
 
-      response = await chai
+      const response = await chai
         .request(app)
         .get('/chocolates/4');
 
@@ -74,7 +73,7 @@ describe('Testing cacaoTrybe API', function () {
         },
       ];
 
-      response = await chai
+      const response = await chai
         .request(app)
         .get('/chocolates/brand/1');
 
@@ -89,7 +88,7 @@ describe('Testing cacaoTrybe API', function () {
         totalChocolates: 4,
       };
 
-      response = await chai
+      const response = await chai
         .request(app)
         .get('/chocolates/total');
 
@@ -113,7 +112,7 @@ describe('Testing cacaoTrybe API', function () {
         },
       ];
 
-      response = await chai
+      const response = await chai
         .request(app)
         .get('/chocolates/search?name=Mo');
 
@@ -124,7 +123,7 @@ describe('Testing cacaoTrybe API', function () {
     it('Should return [] and code status 404 when the string passed is "Zzzz', async function () {
       const output = [];
 
-      response = await chai
+      const response = await chai
         .request(app)
         .get('/chocolates/search?name=ZZzz');
 
@@ -135,23 +134,20 @@ describe('Testing cacaoTrybe API', function () {
 
   describe('PUT method on /chocolates/:id', function () {
     it('Should update the chocolate of the id passed with the new information', async function () {
-      const output = {
-        chocolate: { 
+      const output = { 
           id: 1,
           name: 'Mint Pretty Good',
-          brandId: 2,
-        },
+          brandId: 2,  
       };
-      response = await chai
+      const response = await chai
         .request(app)
-        .put('/chocolates/1')
-        .send({
-          name: 'Mint Pretty Good',
-          brandId: 2,
-        });
+        .put('/chocolates/1').send({
+        name: 'Mint Pretty Good',
+        brandId: 2,
+      });
 
       expect(response.status).to.equal(200);
-      expect(response.body.updatedChocolate).to.deep.equal(output);
+      expect(response.body.chocolate).to.deep.equal(output);
     });
   });
 });

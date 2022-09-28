@@ -5,6 +5,25 @@ const app = express();
 
 app.use(express.json());
 
+app.put('/chocolates/:id', async (req, res) => {
+  const { id } = req.params;
+  const { name, brandId } = req.body;
+  const updatedChocolated = await cacaoTrybe.updateChocolate(Number(id), { name, brandId });
+  if (!updatedChocolated) {
+    return res
+      .status(404)
+      .json({
+        message: 'Chocolate not found!',
+      });
+  }
+
+  res
+    .status(200)
+    .json({
+      chocolate: updatedChocolated,
+    });
+});
+
 app.get('/chocolates/brand/:brandId', async (req, res) => {
   const { brandId } = req.params;
   const chocolates = await cacaoTrybe.getChocolatesByBrandId(Number(brandId));
