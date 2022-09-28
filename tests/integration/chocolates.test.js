@@ -1,11 +1,17 @@
 const chai = require('chai');
 const { expect } = chai;
 const chaiHttp = require('chai-http');
+const sinon = require('sinon');
 const app = require('../../src/app');
+const fs = require('fs');
+
+const mockFile = require('../mocks/mockCacaoTrybeFIle');
 
 chai.use(chaiHttp);
 
 describe('GET method on /chocolates route', function () {
+  sinon.stub(fs.promises, 'readFile')
+    .resolves(mockFile);
   it('Should return a list of all chocolates', async function () {
     const output = [
       { id: 1, name: 'Mint Intense', brandId: 1 },
