@@ -42,7 +42,7 @@ describe('Testing cacaoTrybe API', function () {
       const output = [{
         id: 4,
         name: 'Mounds',
-        brand: 3
+        brandId: 3
       }];
 
       response = await chai
@@ -50,7 +50,7 @@ describe('Testing cacaoTrybe API', function () {
         .get('/chocolates/4');
 
       expect(response.status).to.equal(200);
-      expect(response.body.chocolates).to.deep.equal(output);
+      expect(response.body.chocolate).to.deep.equal(output);
     })
   })
 })

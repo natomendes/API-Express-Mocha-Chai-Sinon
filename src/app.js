@@ -15,4 +15,15 @@ app.get('/chocolates', async (req, res) => {
     });
 });
 
+app.get('/chocolates/:id', async (req, res) => {
+  const { id } = req.params;  
+  const chocolate = await cacaoTrybe.getChocolateById(Number(id));
+  
+  res
+    .status(200)
+    .json({
+      chocolate
+    })
+})
+
 module.exports = app;
