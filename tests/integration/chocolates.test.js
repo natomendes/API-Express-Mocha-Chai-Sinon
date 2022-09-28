@@ -74,7 +74,7 @@ describe('Testing cacaoTrybe API', function () {
         .get('/chocolates/brand/1');
 
       expect(response.status).to.equal(200);
-      expect(response.body.chocolate).to.deep.equal(output);
+      expect(response.body.chocolates).to.deep.equal(output);
     });
   });
 

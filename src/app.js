@@ -18,11 +18,22 @@ app.get('/chocolates', async (req, res) => {
 app.get('/chocolates/:id', async (req, res) => {
   const { id } = req.params;  
   const chocolate = await cacaoTrybe.getChocolateById(Number(id));
-  
+
   res
     .status(200)
     .json({
       chocolate
+    })
+});
+
+app.get('/chocolates/brand/:brandId', async (req, res) => {
+  const { brandId } = req.params;
+  const chocolates = await cacaoTrybe.getChocolatesByBrandId(Number(brandId));
+
+  res
+    .status(200)
+    .json({
+      chocolates
     })
 })
 
