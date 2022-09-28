@@ -97,4 +97,28 @@ describe('Testing cacaoTrybe API', function () {
       expect(response.body.totalChocolates).to.deep.equal(output);
     });
   });
+
+  describe('GET method on /chocolates/search', function () {
+    it('Should the chocolates containing the string passed', async function () {
+      const output = [
+        {
+          id: 3,
+          name: 'Mon Chéri',
+          brandId: 2,
+        },
+        {
+          id: 4,
+          name: 'Mounds',
+          brandId: 3,
+        },
+      ];
+
+      response = await chai
+        .request(app)
+        .get('/chocolates/search?name=Mo');
+
+      expect(response.status).to.equal(200);
+      expect(response.body.totalChocolates).to.deep.equal(output);
+    });
+  });
 });
